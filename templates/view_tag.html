@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block content %}
+
+    <h2>{% trans "Billets avec le mot clef suivant : " %}{{ tag.mot_en }}</h2>
+
+    {% if entrees %}
+        <ul>
+        {% for entree in entrees %}
+            <li><a href="{% url 'blogdetail' entree.id %}">{{ entree.titre_en }}</a></li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>{% trans "Il n'y a pas de billet " %}</p>
+    {% endif %}
+{% endblock %}

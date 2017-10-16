@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block content %}
+
+<div class="post">
+    <div class="date">
+        {% blocktrans with date=object.posted  auteurP=object.author.first_name auteurN=object.author.last_name %}
+        Publié le : {{ date }} par : {{auteurP }} {{auteurN }}
+        {% endblocktrans %}
+    </div>
+
+    <h2>{{ object.titre_en }}</h2>
+     <p>{{ object.texte_en|safe }}</p>
+
+    <h3>{% trans "Commentaires" %}</h3>
+       <ul>
+        {% for commentaire in object.commentaire_set.all %}
+           {% trans "Commenté par : " as auteur %}
+            {% trans " le : " as le %}
+            {% blocktrans with date=commentaire.posted  texte=commentaire.texte_en|safe auteurP=commentaire.author.first_name auteurN=commentaire.author.last_name %}
+            <li>Par {{auteurP}} {{auteurN}} le {{date}}</li>
+                <p>{{texte}}</p>
+            {% endblocktrans %}
+        {% endfor %}
+        </ul>
+    <h3>{% trans "Mots clefs" %}</h3>
+         <p>
+          {% for tag in object.tag.all %}
+             {{tag.mot_en}};
+          {% endfor %}
+           </p>
+</div>
+<div class="liens">
+    <a href="{% url 'commentaire_new' object.id %}" class="btn-default">{% trans "Commenter ce billet" %}</a>
+</div>
+
+{% endblock content %}
+
+{% block pagination %}
+    <a href="{% url 'blogindex' %}">{% trans "Retour à la liste" %}</a>
+{% endblock pagination %}
