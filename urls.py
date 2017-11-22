@@ -14,5 +14,4 @@ urlpatterns = [
     url(r'^tag/(?P<slug>[^\.]+).html', views.view_tag, name='view_blog_tag'),
     url(r'entree/new/$', views.entree_new, name='entree_new'),
     url(r'tag/new/$', views.tag_new, name='tag_new'),
-
 ]

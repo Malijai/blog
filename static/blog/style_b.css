@@ -9,9 +9,9 @@ body  {
     margin: 0;
     font-size: 16px;
     font-family: myFirstFont;
-    background: url(aa95db5513_INV4.jpg) no-repeat center fixed;
+    background: url(IMG_2765.JPG) no-repeat center fixed;
     background-size: cover;
-    height: 95%;
+    height: 93%;
 }
 
 p  {
@@ -77,7 +77,7 @@ textarea {
 
 .page-header {
     opacity: 0.8;
-    background-color: #1D3320;
+    background-color: #244663;
     margin-top: 0;
     padding: 10px 10px 10px 40px;
     margin-bottom: 10px;
@@ -160,7 +160,7 @@ h1::first-letter, h2::first-letter, h3::first-letter, h4::first-letter {
 .footer {
     opacity: 0.9;
     clear: both;
-    background-color: #1D3320;
+    background-color: #244663;
     color: white;
     padding: 15px 70px;
     text-align: center;
@@ -194,22 +194,22 @@ h1::first-letter, h2::first-letter, h3::first-letter, h4::first-letter {
   text-decoration: none;
   outline: none;
   color: #fff;
-  background-color: #347793;
+  background-color: #469EC2;
   border: none;
   border-radius: 5px;
-  box-shadow: 3px 6px #677C7D;
+  box-shadow: 3px 6px #244663;
 }
 
-.btn-default:hover {background-color: #2B4D59}
+.btn-default:hover {background-color: #244663}
 
 .btn-default:active, .btn-group .button:active {
   background-color: #2B4D59;
-  box-shadow: 0 3px #677C7D;
+  box-shadow: 0 3px #244663;
   transform: translateY(4px);
 }
 
 .btn-group .button {
-    background-color: #347793;
+    background-color: #469EC2;
     border: none;
     color: white;
     padding: 10px 25px;
@@ -224,11 +224,12 @@ h1::first-letter, h2::first-letter, h3::first-letter, h4::first-letter {
 }
 
 .btn-group .button:hover {
-    background-color: #4CBDE0;
+    background-color: #244663;
+    border: 1px solid #469EC2;
 }
 
 .langue {
-    background-color: #347793;
+    background-color: #469EC2;
     border: none;
     color: white;
     padding: 10px 25px;
@@ -281,5 +282,5 @@ h1::first-letter, h2::first-letter, h3::first-letter, h4::first-letter {
   background-color: #1D3320;
   border: none;
   border-radius: 5px;
-  box-shadow: 2px 5px #677C7D;
+  box-shadow: 2px 5px #244663;
 }
