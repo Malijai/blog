@@ -16,6 +16,14 @@ class BlogDetail(generic.DetailView):
     template_name = 'blogdetail.html'
     model = Entree
 
+def isManitoba(http_host):
+    return True if 'ntpmb.ca' in http_host else False
+   #return True
+
+def isMalijai(http_host):
+    return True if 'malijai.org' in http_host else False
+    #return True
+
 @login_required(login_url=settings.LOGIN_URI)
 def listing(request):
 #    if request.user.is_authenticated:
@@ -33,32 +41,69 @@ def listing(request):
             posts = paginator.page(paginator.num_pages)
         return render(request, 'list.html', {'posts': posts, 'tags':tag_list})
 
-
-def fait_courriel_commentaire(commentaire, posttitre, billetacommenter):
+def fait_courriel_commentaire(commentaire, posttitre, billetacommenter,host):
     lienpost = posttitre + ' (' + settings.BLOG_URL + str(billetacommenter.id) + '/ )'
-    sujet = _(u"Nouveau commentaire dans le blog de l'observatoire")
-    textecourriel = _(u"""
-Un nouveau commentaire au billet intitulé : {} vient d'être publié par {} {}.
-Vous recevez ce courriel parce que vous ête membre de l'Observatoire en santé mentale et justice du Québec.
-Ne répondez pas à ce courriel, il s'agit d'un envoi automatisé.
-Merci de participer à ce projet.
+    if host == 'MB':
+        sujet = _(u"Nouveau commentaire dans le blog de NTP Manitoba")
+        textecourriel = _(u"""
+        Un nouveau commentaire au billet intitulé : {} vient d'être publié par {} {}.
+        Vous recevez ce courriel parce que vous ête membre de l'équipe du projet NTP Manitiba.
+        Ne répondez pas à ce courriel, il s'agit d'un envoi automatisé.
 
-Malijaï Caulet (malijai.caulet.ippm@ssss.gouv.qc.ca)
-    """).format(lienpost, commentaire.author.first_name, commentaire.author.last_name)
+        Malijaï Caulet (malijai.caulet.ippm@ssss.gouv.qc.ca)
+            """).format(lienpost, commentaire.author.first_name, commentaire.author.last_name)
+    elif host == 'NTP2':
+        sujet = _(u"Nouveau commentaire dans le blog de NTP2 Community")
+        textecourriel = _(u"""
+        Un nouveau commentaire au billet intitulé : {} vient d'être publié par {} {}.
+        Vous recevez ce courriel parce que vous ête membre de l'équipe du projet NTP2 Community.
+        Ne répondez pas à ce courriel, il s'agit d'un envoi automatisé.
+
+        Malijaï Caulet (malijai.caulet.ippm@ssss.gouv.qc.ca)
+            """).format(lienpost, commentaire.author.first_name, commentaire.author.last_name)
+    else:
+        sujet = _(u"Nouveau commentaire dans le blog de l'observatoire")
+        textecourriel = _(u"""
+    Un nouveau commentaire au billet intitulé : {} vient d'être publié par {} {}.
+    Vous recevez ce courriel parce que vous ête membre de l'Observatoire en santé mentale et justice du Québec.
+    Ne répondez pas à ce courriel, il s'agit d'un envoi automatisé.
+    Merci de participer à ce projet.
+
+    Malijaï Caulet (malijai.caulet.ippm@ssss.gouv.qc.ca)
+        """).format(lienpost, commentaire.author.first_name, commentaire.author.last_name)
     return sujet, textecourriel
 
 
-def fait_courriel_entree(entree):
+def fait_courriel_entree(entree, host):
     lienpost = entree.titre_en + ' (' + settings.BLOG_URL + str(entree.id) + '/ )'
-    sujet = _(u"Nouveau billet dans le blog de l'observatoire")
-    textecourriel = _(u"""
-Un nouveau billet intitulé : {} vient d'être publié par {} {}.
-Vous recevez ce courriel parce que vous ête membre de l'Observatoire en santé mentale et justice du Québec.
-Ne répondez pas à ce courriel, il s'agit d'un envoi automatisé.
-Merci de participer à ce projet.
+    if host == 'MB':
+        sujet = _(u"Nouveau billet dans le blog de NTP Manitoba")
+        textecourriel = _(u"""
+    Un nouveau billet intitulé : {} vient d'être publié par {} {}.
+    Vous recevez ce courriel parce que vous ête membre du projet NTP Manitoba.
+    Ne répondez pas à ce courriel, il s'agit d'un envoi automatisé.
 
-Malijaï Caulet (malijai.caulet.ippm@ssss.gouv.qc.ca)
-""").format(lienpost, entree.author.first_name, entree.author.last_name)
+    Malijaï Caulet (malijai.caulet.ippm@ssss.gouv.qc.ca)
+    """).format(lienpost, entree.author.first_name, entree.author.last_name)
+    elif host == 'NTP2':
+        sujet = _(u"Nouveau billet dans le blog de NTP2 Community")
+        textecourriel = _(u"""
+    Un nouveau billet intitulé : {} vient d'être publié par {} {}.
+    Vous recevez ce courriel parce que vous ête membre du projet NTP2 Community.
+    Ne répondez pas à ce courriel, il s'agit d'un envoi automatisé.
+
+    Malijaï Caulet (malijai.caulet.ippm@ssss.gouv.qc.ca)
+    """).format(lienpost, entree.author.first_name, entree.author.last_name)
+    else:
+        sujet = _(u"Nouveau billet dans le blog de l'observatoire")
+        textecourriel = _(u"""
+        Un nouveau billet intitulé : {} vient d'être publié par {} {}.
+        Vous recevez ce courriel parce que vous ête membre de l'Observatoire en santé mentale et justice du Québec.
+        Ne répondez pas à ce courriel, il s'agit d'un envoi automatisé.
+        Merci de participer à ce projet.
+
+        Malijaï Caulet (malijai.caulet.ippm@ssss.gouv.qc.ca)
+        """).format(lienpost, entree.author.first_name, entree.author.last_name)
     return sujet, textecourriel
 
 
@@ -73,7 +118,12 @@ def commentaire_new(request, pk):
             commentaire.entree = Entree.objects.get(pk=pk)
             commentaire.author = request.user
             commentaire.save()
-            sujet, textecourriel = fait_courriel_commentaire(commentaire, posttitre, billetacommenter)
+            if isManitoba(request.META.get('HTTP_HOST')):
+                sujet, textecourriel = fait_courriel_commentaire(commentaire, posttitre, billetacommenter,'MB')
+            elif isMalijai(request.META.get('HTTP_HOST')):
+                sujet, textecourriel = fait_courriel_commentaire(commentaire, posttitre, billetacommenter,'NTP2')
+            else:
+                sujet, textecourriel = fait_courriel_commentaire(commentaire, posttitre, billetacommenter,'')
             envoi_courriel(commentaire.entree.groupe, sujet, textecourriel)
             return redirect('blogdetail', pk=pk)
     else:
@@ -108,7 +158,12 @@ def entree_new(request):
             form.save_m2m()             # form save many to many (ici les tags selectionnes)
              #import ipdb; ipdb.set_trace()
             sujet, textecourriel = fait_courriel_entree(entree)
-            envoi_courriel(entree.groupe, sujet, textecourriel)
+            if isManitoba(request.META.get('HTTP_HOST')):
+                envoi_courriel(entree.groupe, sujet, textecourriel,'MB')
+            elif isMalijai(request.META.get('HTTP_HOST')):
+                envoi_courriel(entree.groupe, sujet, textecourriel, 'NTP2')
+            else:
+                envoi_courriel(entree.groupe, sujet, textecourriel, '')
             return redirect('blogdetail', entree.id)
     else:
         form = EntreeForm()
