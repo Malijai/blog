@@ -30,11 +30,11 @@ class Tag(models.Model):
 class Entree(models.Model):
     titre_en = models.CharField(max_length=200)
     texte_en = RichTextField(config_name='billet')
-    author = models.ForeignKey(User, blank=True, null=True)
+    author = models.ForeignKey(User, blank=True, null=True, on_delete=models.DO_NOTHING)
     posted = models.DateTimeField(db_index=True, auto_now_add=True)
     tag = models.ManyToManyField(Tag)
 #    groupe = models.ForeignKey(Group, blank=True, null=True,limit_choices_to={'name' : 'SansCourriel'})
-    groupe = models.ForeignKey(Group, blank=True, null=True, help_text="optionnel: définir un groupe pour limiter l'envoi de courriel à ses membres", limit_choices_to=~models.Q(name__in=['SansCourriel']))
+    groupe = models.ForeignKey(Group, blank=True, null=True, on_delete=models.DO_NOTHING, help_text="optionnel: définir un groupe pour limiter l'envoi de courriel à ses membres", limit_choices_to=~models.Q(name__in=['SansCourriel']))
 
     class Meta:
        ordering = ['-posted']
@@ -47,8 +47,8 @@ class Entree(models.Model):
 
 class Commentaire(models.Model):
     texte_en = RichTextField(config_name='comment')
-    entree = models.ForeignKey(Entree, on_delete=models.CASCADE)
-    author = models.ForeignKey(User, blank=True, null=True)
+    entree = models.ForeignKey(Entree, on_delete=models.DO_NOTHING)
+    author = models.ForeignKey(User, blank=True, null=True, on_delete=models.DO_NOTHING)
     posted = models.DateTimeField(db_index=True, auto_now_add=True)
 
     class Meta:

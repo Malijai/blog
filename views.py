@@ -5,16 +5,17 @@ from .forms import CommentaireForm, EntreeForm, TagForm, RechercheForm
 from .models import Entree, Tag, User, Group
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.template.defaultfilters import slugify
+from django.conf import settings
 from django.contrib.auth.decorators import login_required
 from django.core import mail
 from django.utils.translation import ugettext_lazy as _
 from django.db.models import Q
-from django.conf import settings
 
 
 class BlogDetail(generic.DetailView):
     template_name = 'blogdetail.html'
     model = Entree
+
 
 def isManitoba(http_host):
     return True if 'ntpmb.ca' in http_host else False
@@ -23,6 +24,7 @@ def isManitoba(http_host):
 def isMalijai(http_host):
     return True if 'malijai.org' in http_host else False
     #return True
+
 
 @login_required(login_url=settings.LOGIN_URI)
 def listing(request):
@@ -40,6 +42,7 @@ def listing(request):
             # If page is out of range (e.g. 9999), deliver last page of results.
             posts = paginator.page(paginator.num_pages)
         return render(request, 'list.html', {'posts': posts, 'tags':tag_list})
+
 
 def fait_courriel_commentaire(commentaire, posttitre, billetacommenter,host):
     lienpost = posttitre + ' (' + settings.BLOG_URL + str(billetacommenter.id) + '/ )'
