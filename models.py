@@ -20,8 +20,6 @@ class Tag(models.Model):
    def __str__(self):
        return '%s' % self.mot_en
 
-   def __unicode__(self):
-       return u'%s' % self.mot_en
 
    @permalink
    def get_absolute_url(self):
@@ -42,8 +40,6 @@ class Entree(models.Model):
     def __str__(self):
         return '%s' % self.titre_en
 
-    def __unicode__(self):
-        return u'%s' % self.titre_en
 
 class Commentaire(models.Model):
     texte_en = RichTextField(config_name='comment')
@@ -57,8 +53,6 @@ class Commentaire(models.Model):
     def __str__(self):
         return  '%s' % self.texte_en
 
-    def __unicode__(self):
-        return u'%s' % self.texte_en
 
     
 
