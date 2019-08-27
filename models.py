@@ -1,13 +1,11 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
-from django.db.models import permalink
 from django.contrib.auth.models import User, Group
 from django.utils.translation import ugettext_lazy as _
 from ckeditor.fields import RichTextField
 from django.db import models
-
-
 from django.utils.encoding import python_2_unicode_compatible
+
 
 # Create your models here.
 class Tag(models.Model):
@@ -21,9 +19,9 @@ class Tag(models.Model):
        return '%s' % self.mot_en
 
 
-   @permalink
    def get_absolute_url(self):
        return ('view_blog_tag', None, {'slug': self.slug})
+
 
 class Entree(models.Model):
     titre_en = models.CharField(max_length=200)
@@ -51,7 +49,7 @@ class Commentaire(models.Model):
         ordering = ['posted']
 
     def __str__(self):
-        return  '%s' % self.texte_en
+        return '%s' % self.texte_en
 
 
     
