@@ -4,51 +4,56 @@
     <head>
         <title>Blog</title>
         <link rel="stylesheet" href="{% static 'blog/style_b.css' %}">
+        <link rel="stylesheet" href="{% static 'blog/liliacgrey.css' %}">
+        <link rel="stylesheet" href="{% static 'blog/w3.css' %}">
     </head>
     <body>
-        <div class="page-header">
-            <div class="date">
-                <div class="btn-group">
- <!--                   <form action="{% url 'set_language' %}" method="post">
+
+    <div class="page-header w3-theme-d4">
+        <div class="date">
+            <div class="btn-group">
+                    <form action="{% url 'set_language' %}" method="post">
                         {% csrf_token %}
+                        <a href="{% url 'entree_new' %}" class="w3-button">{% trans "Ajouter un billet" %}</a>
+                        <a href="{% url 'recherche' %}" class="w3-button">{% trans "Recherche" %}</a>
+                        <a href="{% url 'blogindex' %}" class="w3-button">Blog </a>
+                        <a href="{% url 'dossierfolder' 1 %}" class="w3-button">{% trans "Fichiers" %}</a>
+                        <a href="{% url 'entreesystemes' %}" class="w3-button"> {% trans "Accueil" %}</a>
                         <input name="next" type="hidden" value="{{ index }}" />
                         {% get_current_language as LANGUAGE_CODE %}
                         {% get_available_languages as LANGUAGES %}
                         {% get_language_info_list for LANGUAGES as languages %}
                         {% for language in languages %}
                             {% if language.code != LANGUAGE_CODE %}
-                                <input type="submit" class="langue" name="language" value="{{ language.code }}" />
+                                <input type="submit" class="w3-button w3-theme-l1" name="language" value="{{ language.code }}" />
                             {% endif %}
                         {% endfor %}
--->
-                        <a href="{% url 'entree_new' %}" class="button">{% trans "Ajouter un billet" %}</a>
-                        <a href="{% url 'recherche' %}" class="button">{% trans "Recherche" %}</a>
-                        <a href="{% url 'blogindex' %}" class="button">Blog </a>
-                        <a href="{% url 'dossier' 1 %}" class="button">{% trans "Fichiers" %}</a>
-                        <a href="/" class="button"> {% trans "Accueil" %}</a>
-                        <a href="{% url 'logout' %}" class="button"> Logout</a>
-                    <!--</form>-->
-                </div>
+                    <a href="{% url 'logout' %}" class="w3-button"> Logout</a>
+                </form>
             </div>
-         <h1>Blog</h1>
         </div>
-        <div class="wrap">
-          <div class="left_col">
+     <h1>Blog</h1>
+    </div>
+
+    <div class="principal w3-theme-l5">
+        <div class="w3-container w3-padding">
+          <div class="w3-threequarter">
               {% block content %}
               {% endblock %}
           </div>
-            <div class="right_col">
+          <div class="w3-quarter  w3-center">
                {% block lateral %}
                {% endblock %}
             </div>
         </div>
+    </div>
+    <footer class="w3-container w3-theme-d5 footerw3">
+        <div class="footergauche">
+          {% block pagination %}
+          {% endblock %}
+        <a href="https://github.com/Malijai/observatoire/" class="date" ><img src="/static/images/GitHub-Mark-Light-32px.png"></a>
+         </div>
+    </footer>
 
-        <div class="footer">
-            <div class="footergauche">
-              {% block pagination %}
-              {% endblock %}
-            <a href="https://github.com/Malijai/observatoire/" class="date" ><img src="/static/images/GitHub-Mark-Light-32px.png"></a>
-             </div>
-        </div>
     </body>
 </html>

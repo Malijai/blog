@@ -9,7 +9,7 @@
         <table  class="list">
             {{ form.media }}
             {{ form.as_table }}
-            <tr><td><button type="submit" class="btn-default">Save</button></td>
+            <tr><td><button type="submit" class="w3-button w3-theme-d5">Save</button></td>
             <td> </td></tr>
         </table>
      </form>
@@ -24,6 +24,6 @@
      {% endfor %}
     </p>
 <p><em>{% trans "Si vous désirez ajouter un mot clef, faites le avant d'écrire votre texte" %}</em>
-<br /><p><a href="{% url 'tag_new' %}" class="btn-default">{% trans "Ajouter un mot clef à la liste" %}</a></p>
+<br /><p><a href="{% url 'tag_new' %}" class="w3-button w3-theme-d5">{% trans "Ajouter un mot clef à la liste" %}</a></p>
 <br />
 {% endblock %}

@@ -4,6 +4,7 @@ from django import forms
 from .models import Commentaire, Entree, Tag, Group
 from django.utils.translation import ugettext_lazy as _
 
+
 class CommentaireForm(forms.ModelForm):
      class Meta:
         model = Commentaire
@@ -12,14 +13,12 @@ class CommentaireForm(forms.ModelForm):
 
 
 class EntreeForm(forms.ModelForm):
-
-     class Meta:
+    class Meta:
         model = Entree
-        fields = ('titre_en', 'texte_en', 'tag', 'groupe')
+        fields = ('titre_en', 'texte_en', 'tag')
         labels = {'texte_en': _('Votre texte'),
-                  'titre_en': _('Votre titre doit etre explicite'),
+                  'titre_en': _('Votre titre doit être explicite'),
                   'tag': _('Indiquez des mots clefs (Ctrl + Click)'),
-                  'groupe':_('Indiquer le groupe cible si nécessaire'),
                   }
 
 

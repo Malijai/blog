@@ -1,24 +1,5 @@
-@font-face {
-    font-family: myFirstFont;
-    src: url(Arsenal-Regular.otf);
-}
-
 html{height: 100%;}
 
-body  {
-    margin: 0;
-    font-size: 16px;
-    font-family: myFirstFont;
-    background: url(IMG_2765.JPG) no-repeat center fixed;
-    background-size: cover;
-    height: 93%;
-}
-
-p  {
-    margin: 0;
-    font-size: 16px;
-    font-family: myFirstFont;
-}
 
 p.espace  {
     margin: 10;
@@ -26,7 +7,6 @@ p.espace  {
 
 input, select, textarea {
     background-color: #E5E5E5;
-    font-family: myFirstFont;
 }
 
 .entetelangue {
@@ -77,7 +57,6 @@ textarea {
 
 .page-header {
     opacity: 0.8;
-    background-color: #244663;
     margin-top: 0;
     padding: 10px 10px 10px 40px;
     margin-bottom: 10px;
@@ -128,7 +107,6 @@ h1::first-letter, h2::first-letter, h3::first-letter, h4::first-letter {
     margin-bottom: 5px;
     border: 2px solid grey;
     border-radius: 10px 25px;
-    background-color: #E5E5E5;
     padding: 2px 10px 2px 15px;
 }
 
@@ -157,19 +135,6 @@ h1::first-letter, h2::first-letter, h3::first-letter, h4::first-letter {
     text-align: center;
 }
 
-.footer {
-    opacity: 0.9;
-    clear: both;
-    background-color: #244663;
-    color: white;
-    padding: 15px 70px;
-    text-align: center;
-    font: bold 1em;
-    position: relative;
-	margin-top: -30px; /* negative value of footer height */
-	height: 30px;
-}
-
 .footergauche {
    width:74%;
 }
@@ -183,6 +148,9 @@ h1::first-letter, h2::first-letter, h3::first-letter, h4::first-letter {
     color: #FFFFFF;
     font: bold 1em ;
 }
+
+
+
 
 .btn-default{
   display: inline-block;
@@ -283,4 +251,15 @@ h1::first-letter, h2::first-letter, h3::first-letter, h4::first-letter {
   border: none;
   border-radius: 5px;
   box-shadow: 2px 5px #244663;
+}
+
+.principal {
+    margin-bottom: 80px;
+    margin-left: 30px;
+}
+
+.footerw3 {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
 }

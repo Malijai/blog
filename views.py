@@ -2,7 +2,8 @@
 from django.shortcuts import render_to_response, render, redirect, get_object_or_404
 from django.views import generic
 from .forms import CommentaireForm, EntreeForm, TagForm, RechercheForm
-from .models import Entree, Tag, User, Group
+from .models import Entree, Tag
+from accueil.models import Projet
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.template.defaultfilters import slugify
 from django.conf import settings
@@ -134,21 +135,19 @@ def commentaire_new(request, pk):
                 sujet, textecourriel = fait_courriel_commentaire(commentaire, posttitre, billetacommenter, 'NTP2')
             else:
                 sujet, textecourriel = fait_courriel_commentaire(commentaire, posttitre, billetacommenter, '')
-            envoi_courriel(commentaire.entree.groupe, sujet, textecourriel)
+            envoi_courriel(sujet, textecourriel)
             return redirect('blogdetail', pk=pk)
     else:
         form = CommentaireForm()
     return render(request, "commentaire_edit.html", {'form': form, 'post_id': pk, 'Posttitre':  posttitre})
 
 
-def envoi_courriel(groupe, sujet, textecourriel):
-    courriel_query = User.objects.exclude(Q(email__isnull=True) | Q(email=u'') | Q(groups__name=u'SansCourriel'))
-    if groupe:
-        courriel_query = courriel_query & (User.objects.filter(groups=groupe))
-    courriels = [user.email for user in courriel_query]
+def envoi_courriel(sujet, textecourriel):
+    users_ntp2 = [p.user for p in Projet.objects.filter(Q(projet=Projet.NTP2) | Q(projet=Projet.ALL))]
+    courriels = [user.email for user in users_ntp2 if user.email]
     with mail.get_connection() as connection:
         mail.EmailMessage(
-            sujet, textecourriel, 'malijai.caulet.ippm@ssss.gouv.qc.ca', courriels,
+            sujet, textecourriel, 'malijai.caulet@ntp-ptn.org', courriels,
             connection=connection,
         ).send()
 
@@ -168,13 +167,13 @@ def entree_new(request):
             #  import ipdb; ipdb.set_trace()
             if ismanitoba(request.META.get('HTTP_HOST')):
                 sujet, textecourriel = fait_courriel_entree(entree, 'MB')
-                envoi_courriel(entree.groupe, sujet, textecourriel)
+                envoi_courriel(sujet, textecourriel)
             elif isntp(request.META.get('HTTP_HOST')):
                 sujet, textecourriel = fait_courriel_entree(entree, 'NTP2')
-                envoi_courriel(entree.groupe, sujet, textecourriel)
+                envoi_courriel(sujet, textecourriel)
             else:
                 sujet, textecourriel = fait_courriel_entree(entree, '')
-                envoi_courriel(entree.groupe, sujet, textecourriel)
+                envoi_courriel(sujet, textecourriel)
             return redirect('blogdetail', entree.id)
     else:
         form = EntreeForm()
@@ -223,6 +222,7 @@ def get_recherchetexte(request):
         form_class = RechercheForm()
 
     return render(request, 'recherche.html', {'form': form_class})
+
 
 def index(request):
     return render(request, 'logout.html')
