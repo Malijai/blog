@@ -1,0 +1,265 @@
+html{height: 100%;}
+
+
+p.espace  {
+    margin: 10;
+}
+
+input, select, textarea {
+    background-color: #E5E5E5;
+}
+
+.entetelangue {
+    margin: 0;
+    font-size: 1em;
+    padding: 0px 0px;
+    margin: 0px 0;
+    border: none;
+    border-radius: 0px;
+}
+
+input[type=text], select {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    font-family: myFirstFont;
+}
+
+textarea {
+    width: 100%;
+    height: 150px;
+    padding: 12px 20px;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+}
+
+.wrap {
+   width:90%;
+   margin:0 auto;
+   min-height: 90%;
+}
+
+.left_col {
+   float:left;
+   width:74%;
+}
+
+.right_col {
+   float:right;
+   width:25%;
+   text-align: center;
+}
+
+.page-header {
+    opacity: 0.8;
+    margin-top: 0;
+    padding: 10px 10px 10px 40px;
+    margin-bottom: 10px;
+}
+
+.page-header h1, .page-header h1 a, .page-header h1 a:visited, .page-header h1 a:active {
+    color: #ffffff;
+    font-size: 26pt;
+    text-decoration: none;
+}
+
+h1, h2, h3, h4 {
+    margin-bottom: 3px;
+}
+
+h1::first-letter, h2::first-letter, h3::first-letter, h4::first-letter {
+    text-transform: capitalize;
+}
+
+.date {
+    float: right;
+    color: #828282;
+}
+
+.date a, .date a:visited {
+    color: white;
+    font: bold 1em ;
+    text-decoration: none;
+}
+
+.save {
+    float: right;
+}
+
+.post-form textarea, .post-form input {
+    width: 90%;
+}
+
+.top-menu, .top-menu:hover, .top-menu:visited {
+    color: #ffffff;
+    float: right;
+    font-size: 26pt;
+    margin-right: 20px;
+}
+
+.post {
+    opacity: 0.9;
+    margin-bottom: 5px;
+    border: 2px solid grey;
+    border-radius: 10px 25px;
+    padding: 2px 10px 2px 15px;
+}
+
+.post h1 a, .post h1 a:visited {
+    color: #000000;
+}
+
+.liens {
+    opacity: 0.9;
+    clear: both;
+    background-color: #BFBFBF;
+    color: #FFFF00;
+    text-align: center;
+    padding: 15px;
+    border: 2px solid #1D3320;
+    border-radius: 5px;
+    margin-bottom: 5px;
+}
+
+.liens a, .liens a:visited {
+    color: #FFFFFF;
+    font: bold 1em Arial, sans-serif;
+}
+
+.right_col h2{
+    text-align: center;
+}
+
+.footergauche {
+   width:74%;
+}
+
+.footer a,.footer a:visited {
+    color: #FFFFFF;
+    font: bold 1em ;
+}
+
+.step-links a,.step-links a:visited {
+    color: #FFFFFF;
+    font: bold 1em ;
+}
+
+
+
+
+.btn-default{
+  display: inline-block;
+  padding: 10px 25px;
+  font-weight: bold;
+  font-size: 20px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  outline: none;
+  color: #fff;
+  background-color: #469EC2;
+  border: none;
+  border-radius: 5px;
+  box-shadow: 3px 6px #244663;
+}
+
+.btn-default:hover {background-color: #244663}
+
+.btn-default:active, .btn-group .button:active {
+  background-color: #2B4D59;
+  box-shadow: 0 3px #244663;
+  transform: translateY(4px);
+}
+
+.btn-group .button {
+    background-color: #469EC2;
+    border: none;
+    color: white;
+    padding: 10px 25px;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-weight: bold;
+    font-size: 15px;
+    cursor: pointer;
+    float: left;
+}
+
+.btn-group .button:hover {
+    background-color: #244663;
+    border: 1px solid #469EC2;
+}
+
+.langue {
+    background-color: #469EC2;
+    border: none;
+    color: white;
+    padding: 10px 25px;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-family: myFirstFont;
+    font-weight: bold;
+    font-size: 15px;
+    cursor: pointer;
+    float: left;
+    border-radius: 50px 10px;
+}
+
+.pagination {
+    display: inline-block;
+}
+
+.pagination a {
+    color: white;
+    float: left;
+    padding: 8px 16px;
+    text-decoration: none;
+    border-radius: 5px;
+    border: 1px solid #ddd; /* Gray */
+}
+
+.pagination a.active {
+    background-color: #E5E5E5;
+    color: black;
+    border-radius: 5px;
+}
+
+.pagination a:hover:not(.active) {
+    background-color: #ddd;
+    border-radius: 5px;
+}
+
+.btn-reserve{
+  display: inline-block;
+  padding: 5px 20px;
+  font-weight: bold;
+  font-size: 16px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  outline: none;
+  color: #fff;
+  background-color: #1D3320;
+  border: none;
+  border-radius: 5px;
+  box-shadow: 2px 5px #244663;
+}
+
+.principal {
+    margin-bottom: 80px;
+    margin-left: 30px;
+}
+
+.footerw3 {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
