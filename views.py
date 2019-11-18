@@ -53,7 +53,7 @@ def listing(request):
 
 
 def fait_courriel_commentaire(commentaire, posttitre, billetacommenter, host):
-    lienpost = posttitre + ' (' + settings.BLOG_URL + str(billetacommenter.id) + '/ )'
+    lienpost = posttitre + ' (' + settings.BLOG_URL + str(billetacommenter.id) + ' )'
     if host == 'MB':
         sujet = _(u"Nouveau commentaire dans le blog de NTP Manitoba")
         textecourriel = _(u"""
@@ -86,7 +86,7 @@ def fait_courriel_commentaire(commentaire, posttitre, billetacommenter, host):
 
 
 def fait_courriel_entree(entree, host):
-    lienpost = entree.titre_en + ' (' + settings.BLOG_URL + str(entree.id) + '/ )'
+    lienpost = entree.titre_en + ' (' + settings.BLOG_URL + str(entree.id) + ' )'
     if host == 'MB':
         sujet = _(u"Nouveau billet dans le blog de NTP Manitoba")
         textecourriel = _(u"""
@@ -144,7 +144,7 @@ def commentaire_new(request, pk):
 
 def envoi_courriel(sujet, textecourriel):
     users_ntp2 = [p.user for p in Projet.objects.filter(Q(projet=Projet.NTP2) | Q(projet=Projet.ALL))]
-    courriels = [user.email for user in users_ntp2 if user.email]
+    courriels = [user.email for user in users_ntp2 if user.email and user.is_active]
     with mail.get_connection() as connection:
         mail.EmailMessage(
             sujet, textecourriel, 'malijai.caulet@ntp-ptn.org', courriels,
