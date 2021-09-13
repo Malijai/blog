@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
-from django.shortcuts import render_to_response, render, redirect, get_object_or_404
+#from django.shortcuts import render_to_response, render, redirect, get_object_or_404
+from django.shortcuts import render, redirect, get_object_or_404
 from django.views import generic
 from .forms import CommentaireForm, EntreeForm, TagForm, RechercheForm
 from .models import Entree, Tag
@@ -199,7 +200,7 @@ def tag_new(request):
 @login_required(login_url=settings.LOGIN_URI)
 def view_tag(request, slug):
     tag = get_object_or_404(Tag, slug=slug)
-    return render_to_response('view_tag.html', {
+    return render(request, 'view_tag.html', {
         'tag': tag,
         'entrees': Entree.objects.filter(tag=tag)  # [:10]
     })
